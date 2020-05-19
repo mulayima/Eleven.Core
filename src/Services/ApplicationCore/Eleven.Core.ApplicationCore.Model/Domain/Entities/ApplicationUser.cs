@@ -3,20 +3,26 @@ using Eleven.Core.ApplicationCore.Model.Domain.Infrastructure.Entities;
 
 namespace Eleven.Core.ApplicationCore.Model.Domain.Entities
 {
-    //Extend This Class
-    public class ElevenUser : Entity<Guid>
+    public class ApplicationUser : Entity<Guid>
     {
-        public ElevenUser()
+        public ApplicationUser()
         {
             Id = Guid.NewGuid();
         }
-        public ElevenUser(Guid id) : base(id) { }
+
+        public ApplicationUser(Guid id) : base(id) { }
 
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
+        public string LoginName { get; set; }
+
         public string Email { get; set; }
+
+        public Guid IdStatus { get; set; }
+
+        public Guid IdOwner { get; set; }
 
         public byte[] PasswordSalt { get; set; }
 
@@ -26,6 +32,5 @@ namespace Eleven.Core.ApplicationCore.Model.Domain.Entities
 
         public DateTime? RefreshTokenExpirationDate { get; set; }
 
-        public int IdStatus { get; set; }
     }
 }

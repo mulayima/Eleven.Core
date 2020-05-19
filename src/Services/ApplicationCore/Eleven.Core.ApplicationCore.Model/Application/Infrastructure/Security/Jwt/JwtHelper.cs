@@ -20,7 +20,7 @@ namespace Eleven.Core.ApplicationCore.Model.Application.Infrastructure.Security.
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
 
         }
-        public AccessToken CreateAccessToken(ElevenUser user)
+        public AccessToken CreateAccessToken(ApplicationUser user)
         {
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
             var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
@@ -36,7 +36,7 @@ namespace Eleven.Core.ApplicationCore.Model.Application.Infrastructure.Security.
             };
         }
 
-        private JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, ElevenUser user, SigningCredentials signingCredentials)
+        private JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, ApplicationUser user, SigningCredentials signingCredentials)
         {
             var jwt = new JwtSecurityToken(
                 issuer: _tokenOptions.Issuer,
@@ -50,7 +50,7 @@ namespace Eleven.Core.ApplicationCore.Model.Application.Infrastructure.Security.
             return jwt;
         }
 
-        private IEnumerable<Claim> ApplyClaims(ElevenUser user)
+        private IEnumerable<Claim> ApplyClaims(ApplicationUser user)
         {
             var claims = new List<Claim>();
             claims.AddNameIdentifier(user.Id.ToString());
@@ -66,7 +66,7 @@ namespace Eleven.Core.ApplicationCore.Model.Application.Infrastructure.Security.
             throw new NotImplementedException();
         }
 
-        public void RevokeRefreshToken(ElevenUser user)
+        public void RevokeRefreshToken(ApplicationUser user)
         {
             user.RefreshToken = null;
         }

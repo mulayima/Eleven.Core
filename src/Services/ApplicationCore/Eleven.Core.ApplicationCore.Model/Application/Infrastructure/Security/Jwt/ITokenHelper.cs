@@ -4,8 +4,8 @@ namespace Eleven.Core.ApplicationCore.Model.Application.Infrastructure.Security.
 {
     public interface ITokenHelper
     {
-        AccessToken CreateAccessToken(ElevenUser user);
+        AccessToken CreateAccessToken(ApplicationUser user);
 
-        void RevokeRefreshToken(ElevenUser user);
+        void RevokeRefreshToken(ApplicationUser user);
     }
 }
