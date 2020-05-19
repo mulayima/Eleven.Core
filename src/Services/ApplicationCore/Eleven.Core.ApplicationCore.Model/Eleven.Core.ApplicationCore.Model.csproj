@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Constants\" />
+    <Folder Include="Application\DTOs\" />
+    <Folder Include="Application\Enum\" />
+    <Folder Include="Application\Infrastructure\Exceptions\" />
+    <Folder Include="Application\Infrastructure\Http\" />
+    <Folder Include="Application\Infrastructure\Security\Hashing\" />
+    <Folder Include="Application\Validators\" />
+    <Folder Include="Application\Services\" />
+    <Folder Include="Application\Utils\" />
+    <Folder Include="Domain\Validators\" />
+    <Folder Include="Domain\Services\" />
+    <Folder Include="Domain\Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
+  </ItemGroup>
+
+</Project>
