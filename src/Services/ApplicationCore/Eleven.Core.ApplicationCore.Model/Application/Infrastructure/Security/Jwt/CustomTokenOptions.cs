@@ -1,7 +1,7 @@
 ﻿
 namespace Eleven.Core.ApplicationCore.Model.Application.Infrastructure.Security.Jwt
 {
-    public class TokenOptions
+    public class CustomTokenOptions
     {
         public string Audience { get; set; }
         public string Issuer { get; set; }

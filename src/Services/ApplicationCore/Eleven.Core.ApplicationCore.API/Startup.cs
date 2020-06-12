@@ -83,11 +83,11 @@ namespace Eleven.Core.ApplicationCore.API
     {
         public static IServiceCollection AddCustomConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            return services.Configure<TokenOptions>(configuration.GetSection("TokenOptions"));
+            return services.Configure<CustomTokenOptions>(configuration.GetSection("TokenOptions"));
         }
         public static IServiceCollection AddApplicationCoreJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            var tokenOptions = configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            var tokenOptions = configuration.GetSection("TokenOptions").Get<CustomTokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
@@ -100,7 +100,8 @@ namespace Eleven.Core.ApplicationCore.API
                             ValidateIssuerSigningKey = true,
                             ValidIssuer = tokenOptions.Issuer,
                             ValidAudience = tokenOptions.Audience,
-                            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey),
+                            ClockSkew = TimeSpan.Zero
                         };
                     });
 
