@@ -12,9 +12,9 @@ namespace Eleven.Core.ApplicationCore.Model.Application.Infrastructure.Security.
 {
     public class JwtHelper : ITokenHelper
     {
-        private TokenOptions _tokenOptions;
+        private CustomTokenOptions _tokenOptions;
         private readonly DateTime _accessTokenExpiration;
-        public JwtHelper(IOptions<TokenOptions> tokenOptions)
+        public JwtHelper(IOptions<CustomTokenOptions> tokenOptions)
         {
             _tokenOptions = tokenOptions.Value;
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
@@ -24,7 +24,7 @@ namespace Eleven.Core.ApplicationCore.Model.Application.Infrastructure.Security.
         {
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
             var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
-            var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials);
+            var jwt = CreateJwtSecurityToken(user, signingCredentials);
             var jwtSecuritTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecuritTokenHandler.WriteToken(jwt);
 
@@ -36,7 +36,7 @@ namespace Eleven.Core.ApplicationCore.Model.Application.Infrastructure.Security.
             };
         }
 
-        private JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, ApplicationUser user, SigningCredentials signingCredentials)
+        private JwtSecurityToken CreateJwtSecurityToken(ApplicationUser user, SigningCredentials signingCredentials)
         {
             var jwt = new JwtSecurityToken(
                 issuer: _tokenOptions.Issuer,
